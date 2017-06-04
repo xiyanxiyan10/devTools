@@ -60,7 +60,6 @@ gulp.task('pull', function () {
         test: "develop",
         production: "master"
     };
-    //
     git.checkout(repo[env], function (err) {
         if (err) throw err;
         git.pull('origin', [repo[env]], function (err) {
@@ -162,116 +161,6 @@ gulp.task('project-main', function (cb) {
 
     var envCfg = getEnvConf("main");
     require("./gulp/deploy.js")(envCfg, cfg);
-
-    gulpSequence("clean:dist", "copyWebSiteToDist",
-        "process:setting", "process:dockerfile", "zipPublishFile",
-        "startDeploy",
-        function () {
-            console.log("***** Deploy Finished！！！！");
-            process.exit(0);
-        });
-});
-
-gulp.task('project-sendemail', function (cb) {
-    var env = argv.env || "test";
-    cfg = deployConfig[env];
-    if (!cfg) {
-        console.error("Invalid env !!!");
-    }
-    cfg.deploySrc = ["dist/**"];
-    cfg.deployPath = cfg.deployPath + "/app";
-    cfg.deployServers = cfg.servers;
-
-    var envCfg = getEnvConf("sendemail");
-    require("./.gulp/deploy.js")(envCfg, cfg);
-
-    gulpSequence("clean:dist", "copyWebSiteToDist",
-        "process:setting", "process:dockerfile", "zipPublishFile",
-        "startDeploy",
-        function () {
-            console.log("***** Deploy Finished！！！！");
-            process.exit(0);
-        });
-});
-
-gulp.task('project-sendsms', function (cb) {
-    var env = argv.env || "test";
-    cfg = deployConfig[env];
-    if (!cfg) {
-        console.error("Invalid env !!!");
-    }
-    cfg.deploySrc = ["dist/**"];
-    cfg.deployPath = cfg.deployPath + "/app";
-    cfg.deployServers = cfg.servers;
-
-    var envCfg = getEnvConf("sendsms");
-    require("./.gulp/deploy.js")(envCfg, cfg);
-
-    gulpSequence("clean:dist", "copyWebSiteToDist",
-        "process:setting", "process:dockerfile", "zipPublishFile",
-        "startDeploy",
-        function () {
-            console.log("***** Deploy Finished！！！！");
-            process.exit(0);
-        });
-});
-
-gulp.task('project-sendcdn', function (cb) {
-    var env = argv.env || "test";
-    cfg = deployConfig[env];
-    if (!cfg) {
-        console.error("Invalid env !!!");
-    }
-    cfg.deploySrc = ["dist/**"];
-    cfg.deployPath = cfg.deployPath + "/app";
-    cfg.deployServers = cfg.servers;
-
-    var envCfg = getEnvConf("sendcdn");
-    require("./.gulp/deploy.js")(envCfg, cfg);
-
-    gulpSequence("clean:dist", "copyWebSiteToDist",
-        "process:setting", "process:dockerfile", "zipPublishFile",
-        "startDeploy",
-        function () {
-            console.log("***** Deploy Finished！！！！");
-            process.exit(0);
-        });
-});
-
-gulp.task('project-checkpay', function (cb) {
-    var env = argv.env || "test";
-    cfg = deployConfig[env];
-    if (!cfg) {
-        console.error("Invalid env !!!");
-    }
-    cfg.deploySrc = ["dist/**"];
-    cfg.deployPath = cfg.deployPath + "/app";
-    cfg.deployServers = cfg.servers;
-
-    var envCfg = getEnvConf("checkpay");
-    require("./.gulp/deploy.js")(envCfg, cfg);
-
-    gulpSequence("clean:dist", "copyWebSiteToDist",
-        "process:setting", "process:dockerfile", "zipPublishFile",
-        "startDeploy",
-        function () {
-            console.log("***** Deploy Finished！！！！");
-            process.exit(0);
-        });
-});
-
-gulp.task('project-scheduler-bill', function (cb) {
-    var env = argv.env || "test";
-    cfg = deployConfig[env];
-    if (!cfg) {
-        console.error("Invalid env !!!");
-    }
-    cfg.deploySrc = ["dist/**"];
-    cfg.deployPath = cfg.deployPath + "/app";
-    cfg.deployServers = cfg.servers;
-
-    var envCfg = getEnvConf("scheduler-bill");
-    require("./.gulp/deploy.js")(envCfg, cfg);
 
     gulpSequence("clean:dist", "copyWebSiteToDist",
         "process:setting", "process:dockerfile", "zipPublishFile",
