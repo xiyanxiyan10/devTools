@@ -8,6 +8,7 @@ Automatic operation and maintenance tools
 
 - docker build
 - gulp manager
+- tools some scripts
 
 
 ## Install
