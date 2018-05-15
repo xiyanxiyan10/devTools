@@ -1,0 +1,16 @@
+# @brief create pvc by storageClass
+# @author mhw
+# @date 2018-05-15
+
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: pvc
+  namespace: default
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 20Mi
+  storageClassName: storageClass

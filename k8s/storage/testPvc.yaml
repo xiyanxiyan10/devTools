@@ -1,0 +1,36 @@
+# @brief Mount pvc in pod
+# @author mhw
+# @date 2018-05-15
+#
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: test-pvc
+  namespace: default
+  labels:
+    name: test-pvc
+spec:
+  containers:
+    - resources:
+        limits :
+          cpu: 0.5
+      image: alpine
+      args:
+      - /bin/sh
+      - -c 
+      - sleep 6000
+      name: test-pvc
+      env:
+        - name: test-pvc
+          # change this
+          value: rbd
+      volumeMounts:
+          # name must match the volume name below
+        - name: test-pvc
+          # mount path within the container
+          mountPath: /data/test-pvc
+  volumes:
+  - name: test-pvc
+    persistentVolumeClaim:
+      claimName: pvc
