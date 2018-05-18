@@ -1,3 +1,7 @@
+#PreInstall ceph-deploy on centos
+#remove old ceph-deploy
+yum remove ceph-deploy
+
 #clean old conf
 rm -rf /etc/ceph/*
 rm -rf /var/lib/ceph/*/*
