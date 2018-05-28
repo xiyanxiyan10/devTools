@@ -1,0 +1,47 @@
+---
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  labels:
+    name: alertmanager-deployment
+  name: alertmanager
+  namespace: kube-system
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: alertmanager
+  template:
+    metadata:
+      labels:
+        app: alertmanager
+    spec:
+      containers:
+      - image: quay.io/prometheus/alertmanager:v0.12.0
+        name: alertmanager
+        args:
+        - "-config.file=/etc/alertmanager/config.yml"
+        - "-storage.path=/alertmanager"
+        ports:
+        - containerPort: 9093
+          protocol: TCP
+          name: http
+        volumeMounts:
+        - name: alertmanager-volume
+          mountPath: /etc/alertmanager
+        resources:
+          requests:
+            cpu: 50m
+            memory: 50Mi
+          limits:
+            cpu: 200m
+            memory: 200Mi
+
+      serviceAccountName: prometheus    
+      volumes:
+      - name: data
+        emptyDir: {}
+      - name: alertmanager-volume
+        configMap:
+          name: alertmanager
+        
