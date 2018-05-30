@@ -16,7 +16,7 @@ data:
     alerting:
       alertmanagers:
         - static_configs:
-          - targets: ["localhost:9093"]
+          - targets: ["alertmanager:9093"]
             
     scrape_configs:
 
@@ -178,7 +178,7 @@ data:
           summary: "{{$labels.instance}}: High Filesystem usage detected"
           description: "{{$labels.instance}}: Filesystem usage is above 80% (current value is: {{ $value }}"
       - alert: NodeMemoryUsage
-        expr: (node_memory_MemTotal - (node_memory_MemFree+node_memory_Buffers+node_memory_Cached )) / node_memory_MemTotal * 100 > 10
+        expr: (node_memory_MemTotal - (node_memory_MemFree+node_memory_Buffers+node_memory_Cached )) / node_memory_MemTotal * 100 > 1
         for: 2m
         labels:
           team: node
@@ -186,7 +186,7 @@ data:
           summary: "{{$labels.instance}}: High Memory usage detected"
           description: "{{$labels.instance}}: Memory usage is above 80% (current value is: {{ $value }}"
       - alert: NodeCPUUsage
-        expr: (100 - (avg by (instance) (irate(node_cpu{job="kubernetes-node-exporter",mode="idle"}[5m])) * 100)) > 10
+        expr: (100 - (avg by (instance) (irate(node_cpu{job="kubernetes-node-exporter",mode="idle"}[5m])) * 100)) > 1
         for: 2m
         labels:
           team: node
