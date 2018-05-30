@@ -7,6 +7,7 @@ metadata:
     name: echo
 spec:
   containers:
-      image: busybox
-      name: test-hello
-      command: ['sh', '-c', 'i=0; while true; do echo "$i: $(date)"; i=$((i+1)); sleep 1; done']
+  - image: busybox
+    name: test-hello
+    command: ['sh', '-c', 'i=0; while true; do echo "$i: $(date)"; i=$((i+1)); sleep 300000; done']
+  
