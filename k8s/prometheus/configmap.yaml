@@ -204,26 +204,26 @@ data:
   config.yml: |-
     global:
       resolve_timeout: 30s
-      smtp_from: "alertmanager" 
-      smtp_smarthost: "smtp.163.com"
-      smtp_auth_username: "15280923564" 
+      smtp_smarthost: "smtp.163.com:25"
+      smtp_from: 'xiyanxiyan10@163.com'
+      smtp_auth_username: "xiyanxiyan10@163.com" 
       smtp_auth_password: "xiyanxiyan10" 
-      smtp_require_tls: true 
+      smtp_require_tls: false
+
     route:
-      receiver: webhook
+      receiver: mailhook
       group_wait: 30s
-      group_interval: 5m
-      repeat_interval: 4h
-      group_by: [alertname]
+      group_interval: 1m
+      repeat_interval: 1m
+      group_by: [NodeMemoryUsage, NodeCPUUsage, NodeFilesystemUsage]
+
       routes:
-      - receiver: webhook
+      - receiver: mailhook
         group_wait: 10s
         match:
           team: node
+    
     receivers:
-    - name: webhook
-      webhook_configs:
-      - url: 'http://apollo/hooks/dingtalk/'
-        send_resolved: true
-      - url: 'http://apollo/hooks/prome/'
-        send_resolved: true          
+    - name: mailhook
+      email_configs:
+      - to: "xiyanxiyan10@hotmail.com"
