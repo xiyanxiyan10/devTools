@@ -8,8 +8,8 @@ data:
     global:
       resolve_timeout: 30s
       smtp_smarthost: "smtp.163.com:25"
-      smtp_from: '15280923564@163.com'
-      smtp_auth_username: "15280923564@163.com" 
+      smtp_from: 'xiyanxiyan10@163.com'
+      smtp_auth_username: "xiyanxiyan10@163.com" 
       smtp_auth_password: "xiyanxiyan10" 
       smtp_require_tls: false
 
@@ -22,7 +22,7 @@ data:
 
       routes:
       - receiver: mailhook
-        group_wait: 10s
+        group_wait: 300s
         match:
           team: node
 
@@ -39,9 +39,17 @@ data:
   mail.tmpl: |
     {{ define "alert.html" }}
     <table>
-    <tr><td>name</td><td>time</td></tr>
+    <tr>
+        <td>name</td>
+        <td>event</td>
+        <td>time</td>
+    </tr>
     {{ range $i, $alert := .Alerts }}
-    <tr><td>{{ index $alert.Labels "alertname" }}</td><td>{{ $alert.StartsAt }}</td></tr>
+    <tr>
+        <td>{{ index $alert.Labels "alertname" }}</td>
+        <td>{{ index $alert.Annotations "description" }}</td>
+        <td>{{ $alert.StartsAt }}</td>
+    </tr>
     {{ end }}
     </table>
     {{ end }}
