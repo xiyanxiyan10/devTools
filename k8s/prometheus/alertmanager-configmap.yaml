@@ -1,0 +1,55 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: alertmanager
+  namespace: kube-system
+data:
+  config.yml: |
+    global:
+      resolve_timeout: 30s
+      smtp_smarthost: "smtp.163.com:25"
+      smtp_from: 'xiyanxiyan10@163.com'
+      smtp_auth_username: "xiyanxiyan10@163.com" 
+      smtp_auth_password: "xiyanxiyan10" 
+      smtp_require_tls: false
+
+    route:
+      receiver: mailhook
+      group_wait: 30s
+      group_interval: 1m
+      repeat_interval: 1m
+      group_by: [NodeMemoryUsage, NodeCPUUsage, NodeFilesystemUsage]
+
+      routes:
+      - receiver: mailhook
+        group_wait: 300s
+        match:
+          team: node
+
+    templates:
+    - '/etc/alertmanager/*.tmpl'
+    
+    receivers:
+    - name: mailhook
+      email_configs:
+      - to: "xiyanxiyan10@hotmail.com"
+        html: '{{ template "alert.html" . }}'
+        headers: { Subject: "[WARN] Warn Email" }
+
+  mail.tmpl: |
+    {{ define "alert.html" }}
+    <table>
+    <tr>
+        <td>name</td>
+        <td>event</td>
+        <td>time</td>
+    </tr>
+    {{ range $i, $alert := .Alerts }}
+    <tr>
+        <td>{{ index $alert.Labels "alertname" }}</td>
+        <td>{{ index $alert.Annotations "description" }}</td>
+        <td>{{ $alert.StartsAt }}</td>
+    </tr>
+    {{ end }}
+    </table>
+    {{ end }}
