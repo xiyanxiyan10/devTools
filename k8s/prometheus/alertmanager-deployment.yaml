@@ -5,7 +5,7 @@ metadata:
   labels:
     name: alertmanager-deployment
   name: alertmanager
-  namespace: kube-system
+  namespace: monitoring
 spec:
   replicas: 1
   selector:
