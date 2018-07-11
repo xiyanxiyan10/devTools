@@ -1,0 +1,10 @@
+kind: Endpoints
+apiVersion: v1
+metadata:
+  name: mysql-production
+  namespace: default
+subsets:
+  - addresses:
+      - ip: 192.168.1.25
+    ports:
+      - port: 3306
