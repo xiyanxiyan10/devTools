@@ -8,10 +8,15 @@ spec:
     apiVersion: extensions/v1beta1
     kind: Deployment
     name: podinfo
-  minReplicas: 2
+  minReplicas: 1
   maxReplicas: 10
   metrics:
-  - type: Pods
-    pods:
-      metricName: http_requests
-      targetAverageValue: 10
+  - type: Resource
+    resource:
+      name: cpu
+      targetAverageValue: 5m
+      #targetAverageUtilization: 2
+  - type: Resource
+    resource:
+      name: memory
+      targetAverageValue: 30Mi
