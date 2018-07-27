@@ -1,0 +1,31 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-vts-exportor
+  namespace: ingress-nginx 
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx-vts-exportor
+  template:
+    metadata:
+      labels:
+        app: nginx-vts-exportor
+      annotations:
+        prometheus.io/scrape: 'true'
+    spec:
+      terminationGracePeriodSeconds: 60
+      restartPolicy: Always
+      containers:
+        - name: nginx-vts-exporter
+          image: sophos/nginx-vts-exporter:latest
+          env:
+            - name: NGINX_STATUS
+              value: "http://ingress-nginx:18080/nginx_status/format/json"
+          ports:
+          - name: http
+            containerPort: 9913
+          securityContext:
+            runAsNonRoot: false
