@@ -1,0 +1,10 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: hpa
+  namespace: kube-system
+data:
+  ca.pem: |
+    -----BEGIN CERTIFICATE-----
+    secret
+    -----END CERTIFICATE-----

@@ -123,8 +123,11 @@ spec:
           imagePullPolicy: Always
           command:
             - /metrics-server
-            - --requestheader-client-ca-file=/conf/ca.pem  
+            - --requestheader-client-ca-file=/etc/hpaconf/ca.pem  
             - --source=kubernetes.summary_api:''
+          volumeMounts:
+          - name: hpaconf
+            mountPath: /etc/hpaconf/
           resources:
             requests:
               cpu: 20m
@@ -132,3 +135,9 @@ spec:
             limits:
               cpu: 100m
               memory: 500Mi
+      volumes:
+      - name: data
+        emptyDir: {}
+      - name: hpaconf
+        configMap:
+          name: hpa
