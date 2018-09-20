@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Config
+clusters:
+- name: k8s-cluster
+  cluster:
+    server: https://10.129.11.80:6443
+    certificate-authority: /Users/xiyanxiyan10/Desktop/userca/ca.pem
+users:
+- name: k8s-user
+  user:
+    client-certificate: /Users/xiyanxiyan10/Desktop/userca/client.crt
+    client-key: /Users/xiyanxiyan10/Desktop/userca/client.key
+contexts:
+- context:
+    cluster: k8s-cluster
+    user: k8s-user
+  name: k8s-context
+
+
+
+
+
+
+
+
