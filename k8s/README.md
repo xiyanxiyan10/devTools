@@ -7,3 +7,4 @@ K8s Yaml File
  - external-service external service
  - monitor monitor container of nodeexporter + prometheus + alertmanager + grafana 
  - hpa autoscale support by metric-server
+ - userCa support for create a user which visit clusters by  kubectl 
