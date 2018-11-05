@@ -1,0 +1,36 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    ingress.kubernetes.io/keepalive-timeout: "0"
+    kubernetes.io/ingress.class: nginx-internet
+    nginx.ingress.kubernetes.io/rewrite-target: /
+  name: internet-alertmanager.test.com-80
+spec:
+  rules:
+  - host: alertmanager.test.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: alertmanager
+          servicePort: 9093
+
+--- 
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    ingress.kubernetes.io/keepalive-timeout: "0"
+    kubernetes.io/ingress.class: nginx-internet
+    nginx.ingress.kubernetes.io/rewrite-target: /
+  name: internet-prometheus.test.com-80
+spec:
+  rules:
+  - host: prometheus.test.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: prometheus
+          servicePort: 9090
