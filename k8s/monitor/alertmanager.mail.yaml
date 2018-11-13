@@ -1,0 +1,25 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: mails
+  namespace: prometheus
+data:
+  mail.tmpl: |
+    {{ define "alert.html" }}
+    <table>
+    <tr>
+        <td>name</td>
+        <td>event</td>
+        <td>start</td>
+        <td>ends</td>
+    </tr>
+    {{ range $i, $alert := .Alerts }}
+    <tr>
+        <td> ({{ index $alert.Annotations "policy" }}) </td>
+        <td> ({{ index $alert.Annotations "description" }}) </td>
+        <td> ({{ $alert.StartsAt.Format "2006-01-02T15:04:05Z07:00" }}) </td>
+        <td> ({{ $alert.EndsAt.Format "2006-01-02T15:04:05Z07:00" }}) </td>
+    </tr>
+    {{ end }}
+    </table>
+    {{ end }}
