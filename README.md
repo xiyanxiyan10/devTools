@@ -9,9 +9,8 @@ Automatic operation and maintenance tools
 
 1. docker  Docker files 
 2. gulp scripts ued to distribute  app
-3. swarm swarm config file
-4. k8s configfile for k8s 
-5. tools tools of scripts
+3. k8s configfile for k8s 
+4. tools tools of scripts
 
 ## Depend
 
@@ -23,6 +22,6 @@ Automatic operation and maintenance tools
 ## Contanct
 
 1. name: lancelot
-2. email:xiyanxiyan10@hotmail.com
+2. email: xiyanxiyan10@hotmail.com
 3. weixin: xiyanxiyan10
 
