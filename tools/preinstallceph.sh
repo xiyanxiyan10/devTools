@@ -13,7 +13,6 @@ iptables -F
 getenforce 
 setenforce 0
 
-
 #install ceph-deploy
 cd /etc/yum.repos.d/
 mv CentOS-Base.repo CentOS-Base.repo.bak
