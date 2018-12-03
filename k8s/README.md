@@ -3,6 +3,9 @@ K8s Yaml File
 
 # Dir 
  - storage storageClass pvc and pv File
+ - influxdb influxdb demo
+ - gitlab demo 
+ - rbac rbac demo
  - tools simple tools for debug
  - external-service external service
  - nginx-ingress support for ingress based on nginx
