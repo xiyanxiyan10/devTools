@@ -4,7 +4,8 @@ K8s Yaml File
 # Dir 
  - storage storageClass pvc and pv File
  - influxdb influxdb demo
- - gitlab demo 
+ - gitlab demo
+ - docker-elk elk support
  - rbac rbac demo
  - tools simple tools for debug
  - external-service external service
