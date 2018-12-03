@@ -1,3 +1,6 @@
 [submodule "k8s/install/kubespray"]
 	path = k8s/install/kubespray
 	url = https://github.com/xiyanxiyan10/kubespray
+[submodule "k8s/docker-elk"]
+	path = k8s/docker-elk
+	url = https://github.com/deviantony/docker-elk
