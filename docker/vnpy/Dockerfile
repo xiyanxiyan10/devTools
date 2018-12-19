@@ -35,7 +35,8 @@ RUN echo "开始配置 vnpy 环境" \
     && echo "deb-src http://mirrors.163.com/ubuntu/ xenial-updates main multiverse restricted universe" >> /etc/apt/sources.list \
 
 # 安装软件包
-RUN apt-get clean \
+RUN echo "安装依包"\
+    && apt-get clean \
     && apt-get update \
     && echo "从 apt 获取软件" \
     && apt-get install -y bzip2 wget libgl1-mesa-glx qt5-default ttf-wqy-microhei \
