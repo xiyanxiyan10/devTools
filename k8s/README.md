@@ -2,6 +2,7 @@
 K8s Yaml File
 
 # Dir 
+ - affinity nodeAffinity, podAffinity and Toleration 
  - storage storageClass pvc and pv File
  - influxdb influxdb demo
  - gitlab demo
