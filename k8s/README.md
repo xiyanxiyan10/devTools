@@ -16,6 +16,7 @@ K8s Yaml File
  - user-ca support for create a user which visit clusters by  kubectl 
  - install tools used for install k8s
  - uninstall tools used for uninstall k8s
+ - job demo for job and cronjob 
 
 # Todo 
 - influxdb docker to k8s
