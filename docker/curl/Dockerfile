@@ -3,7 +3,7 @@ FROM alpine:edge
 # For nghttp2-dev, we need this respository.
 RUN echo https://dl-cdn.alpinelinux.org/alpine/edge/testing >>/etc/apk/repositories 
 
-ENV CURL_VERSION 7.50.1
+ENV CURL_VERSION 7.63.0
 
 RUN apk add --update --no-cache openssl openssl-dev nghttp2-dev ca-certificates
 RUN apk add --update --no-cache --virtual curldeps g++ make perl && \
@@ -29,5 +29,5 @@ rm -r /var/cache/apk && \
 rm -r /usr/share/man && \
 apk del curldeps
 
-ENTRYPOINT ["curl"]
-CMD ["--help"]
+#ENTRYPOINT ["curl"]
+#CMD ["--help"]
