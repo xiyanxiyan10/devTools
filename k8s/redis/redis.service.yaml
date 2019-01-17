@@ -1,0 +1,14 @@
+# cat redis.svc.yml 
+---
+kind: Service
+apiVersion: v1
+metadata:
+  labels:
+    app: redis
+  name: redis
+spec:
+  ports:
+  - port: 6379
+    targetPort: 6379
+  selector:
+    app: redis
