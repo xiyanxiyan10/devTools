@@ -8,6 +8,7 @@ K8s Yaml File
  - gitlab demo
  - docker-elk elk support
  - rbac rbac demo
+ - redis redis app deploy
  - tools simple tools for debug
  - external-service external service
  - nginx-ingress support for ingress based on nginx
