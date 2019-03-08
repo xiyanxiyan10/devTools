@@ -1,4 +1,3 @@
----
 apiVersion: apps/v1beta2
 kind: Deployment
 metadata:
@@ -17,11 +16,12 @@ spec:
         app: alertmanager
     spec:
       containers:
-      - image: prom/alertmanager:v0.12.0
+      - image: reg.changhong.io/library/mmalertmanager
         name: alertmanager
         args:
-        - "-config.file=/etc/alertmanager/config.yml"
-        - "-storage.path=/alertmanager"
+        - "--config.file=/etc/alertmanager/config.yml"
+        - "--storage.path=/etc/alertmanager"
+        #- "--log.level=debug"  
         ports:
         - containerPort: 9093
           protocol: TCP
@@ -29,13 +29,15 @@ spec:
         volumeMounts:
         - name: alertmanager-volume
           mountPath: /etc/alertmanager
+        - name: mails-volume
+          mountPath: /etc/mails
         resources:
           requests:
-            cpu: 50m
-            memory: 50Mi
+            cpu: 100m
+            memory: 500Mi
           limits:
-            cpu: 200m
-            memory: 200Mi
+            cpu: 500m
+            memory: 600Mi
 
       serviceAccountName: prometheus    
       volumes:
@@ -44,4 +46,6 @@ spec:
       - name: alertmanager-volume
         configMap:
           name: alertmanager
-        
+      - name: mails-volume
+        configMap:
+          name: mails

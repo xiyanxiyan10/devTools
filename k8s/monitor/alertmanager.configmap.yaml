@@ -18,16 +18,19 @@ data:
       group_wait: 30s
       group_interval: 1m
       repeat_interval: 1m
-      group_by: [NodeMemoryUsage, NodeCPUUsage, NodeFilesystemUsage]
+      group_by: []
 
       routes:
       - receiver: mailhook
         group_wait: 300s
+        group_interval: 1m
+        repeat_interval: 1m
+        group_by: [NodeMemoryUsage, NodeCPUUsage, NodeFilesystemUsage]
         match:
           team: node
 
     templates:
-    - '/etc/alertmanager/*.tmpl'
+    - '/etc/mails/*.tmpl'
     
     receivers:
     - name: mailhook
@@ -35,21 +38,3 @@ data:
       - to: "xiyanxiyan10@hotmail.com"
         html: '{{ template "alert.html" . }}'
         headers: { Subject: "[WARN] Warn Email" }
-
-  mail.tmpl: |
-    {{ define "alert.html" }}
-    <table>
-    <tr>
-        <td>name</td>
-        <td>event</td>
-        <td>time</td>
-    </tr>
-    {{ range $i, $alert := .Alerts }}
-    <tr>
-        <td>{{ index $alert.Labels "alertname" }}</td>
-        <td>{{ index $alert.Annotations "description" }}</td>
-        <td>{{ $alert.StartsAt }}</td>
-    </tr>
-    {{ end }}
-    </table>
-    {{ end }}
