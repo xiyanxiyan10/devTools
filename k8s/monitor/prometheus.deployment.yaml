@@ -6,7 +6,7 @@ metadata:
   labels:
     name: prometheus-deployment
   name: prometheus
-  namespace: monitoring
+  namespace: prometheus
 spec:
   replicas: 1
   selector:
@@ -35,13 +35,6 @@ spec:
           name: data
         - mountPath: "/etc/prometheus"
           name: prometheus-volume
-        resources:
-          requests:
-            cpu: 100m
-            memory: 100Mi
-          limits:
-            cpu: 500m
-            memory: 2500Mi
 
       serviceAccountName: prometheus    
       volumes:

@@ -5,7 +5,7 @@ metadata:
   labels:
     name: alertmanager-deployment
   name: alertmanager
-  namespace: monitoring
+  namespace: prometheus
 spec:
   replicas: 1
   selector:
@@ -17,7 +17,7 @@ spec:
         app: alertmanager
     spec:
       containers:
-      - image: quay.io/prometheus/alertmanager:v0.12.0
+      - image: prom/alertmanager:v0.12.0
         name: alertmanager
         args:
         - "-config.file=/etc/alertmanager/config.yml"

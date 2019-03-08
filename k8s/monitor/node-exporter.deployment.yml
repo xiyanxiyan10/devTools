@@ -7,7 +7,7 @@ metadata:
     app: node-exporter
     name: node-exporter
   name: node-exporter
-  namespace: monitoring
+  namespace: prometheus
 spec:
   clusterIP: None
   ports:
@@ -22,7 +22,7 @@ apiVersion: extensions/v1beta1
 kind: DaemonSet
 metadata:
   name: node-exporter
-  namespace: monitoring
+  namespace: prometheus
 spec:
   template:
     metadata:

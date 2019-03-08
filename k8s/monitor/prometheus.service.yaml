@@ -6,7 +6,7 @@ metadata:
   labels:
     app: prometheus
   name: prometheus
-  namespace: monitoring
+  namespace: prometheus
 spec:
   type: NodePort
   ports:
@@ -23,7 +23,7 @@ metadata:
   labels:
     app: alertmanager
   name: alertmanager
-  namespace: monitoring
+  namespace: prometheus
 spec:
   type: NodePort
   ports:

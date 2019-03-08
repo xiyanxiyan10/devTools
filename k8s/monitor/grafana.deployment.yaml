@@ -5,7 +5,7 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: grafana-core
-  namespace: monitoring
+  namespace: prometheus
   labels:
     app: grafana
     component: core
@@ -59,7 +59,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: grafana
-  namespace: monitoring
+  namespace: prometheus
   labels:
     app: grafana
     component: core
