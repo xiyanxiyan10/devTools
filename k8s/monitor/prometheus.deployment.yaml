@@ -1,6 +1,4 @@
-# cat prometheus.deploy.yml 
----
-apiVersion: apps/v1beta2
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
@@ -18,15 +16,16 @@ spec:
         app: prometheus
     spec:
       containers:
-      - image: prom/prometheus:v2.0.0
+      - image: reg.changhong.io/library/prometheus
         name: prometheus
         command:
         - "/bin/prometheus"
         args:
         - "--config.file=/etc/prometheus/prometheus.yml"
         - "--storage.tsdb.path=/prometheus"
-        - "--storage.tsdb.retention=24h"
-        - "--web.enable-lifecycle"  
+        - "--storage.tsdb.retention=3h"
+        - "--web.enable-lifecycle"
+          #- "--log.level=debug"  
         ports:
         - containerPort: 9090
           protocol: TCP
@@ -34,14 +33,25 @@ spec:
         - mountPath: "/prometheus"
           name: data
         - mountPath: "/etc/prometheus"
-          name: prometheus-volume
-
-      serviceAccountName: prometheus    
+          name: config-volume
+        - mountPath: "/etc/rules"
+          name: rules-volume
+        resources:
+          requests:
+            cpu: 100m
+            memory: 2000Mi
+          limits:
+            cpu: 500m
+            memory: 4000Mi
+      serviceAccountName: prometheus
+      imagePullSecrets: 
+        - name: regsecret
       volumes:
       - name: data
         emptyDir: {}
-      - name: prometheus-volume
+      - name: config-volume
         configMap:
-          name: prometheus-config
-        
-     
+          name: prometheus-config 
+      - name: rules-volume
+        configMap:
+          name: rules-config 

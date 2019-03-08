@@ -1,0 +1,20 @@
+# cat configmap.yaml 
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: rules-config
+  namespace: prometheus
+data:
+  rules.yml: |
+    groups:
+    - name: test-rule
+      rules:
+      - alert: NodeCPUUsage
+        expr: (1-rate(node_cpu_seconds_total{mode="idle"}[1m]))*100 > 1
+        for: 2m
+        labels:
+          team: node
+        annotations:
+          summary: "{{$labels.instance}}: High Cpu usage detected"
+          description: "{{$labels.instance}}: Cpu usage is above 20% (current value is: {{ $value }}"
+
