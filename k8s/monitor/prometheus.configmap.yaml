@@ -8,6 +8,8 @@ data:
     global:
       scrape_interval:     15s
       evaluation_interval: 15s
+      external_labels:
+        clustername: test  
 
     rule_files:
     - /etc/rules/rules.yml
