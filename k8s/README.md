@@ -1,7 +1,7 @@
 # Brief 
 K8s Yaml File
 
-# Dir 
+# Project
  - affinity nodeAffinity, podAffinity and Toleration 
  - storage storageClass pvc and pv File
  - influxdb influxdb demo
@@ -18,6 +18,5 @@ K8s Yaml File
  - install tools used for install k8s
  - uninstall tools used for uninstall k8s
  - job demo for job and cronjob 
+ - hpa-custom custom hpa support
 
-# Todo 
-- influxdb docker to k8s
