@@ -5,23 +5,15 @@
 Automatic operation and maintenance tools
 
 
-## Module
-
-1. docker  Docker files 
-2. gulp scripts ued to distribute  app
-3. k8s configfile for k8s 
-4. tools tools of scripts
-
-## Depend
-
-1. docker
-2. gulp
-3. nodejs
-4. k8s
+## Project
+ 
+ - Docker Docker demo
+ - Gulp scripts ued to distribute apps
+ - K8s  app deploy based on k8s 
+ -  Tools script tools
 
 ## Contanct
 
-1. name: lancelot
-2. email: xiyanxiyan10@hotmail.com
-3. weixin: xiyanxiyan10
+ - name: meimei
+ - email: xiyanxiyan10@hotmail.com
 
