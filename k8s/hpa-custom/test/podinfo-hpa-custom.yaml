@@ -2,16 +2,17 @@
 apiVersion: autoscaling/v2beta1
 kind: HorizontalPodAutoscaler
 metadata:
-  name: podinfo
+  name: game
+  namespace: matrix
 spec:
   scaleTargetRef:
     apiVersion: extensions/v1beta1
     kind: Deployment
-    name: podinfo
+    name: game
   minReplicas: 2
   maxReplicas: 10
   metrics:
   - type: Pods
     pods:
-      metricName: container_network_receive_bytes_per_second
+      metricName: memory_custom
       targetAverageValue: 6000
