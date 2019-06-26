@@ -10,9 +10,9 @@ spec:
     kind: Deployment
     name: game
   minReplicas: 2
-  maxReplicas: 10
+  maxReplicas: 5
   metrics:
   - type: Pods
     pods:
-      metricName: memory_custom
+      metricName: fs_io_custom
       targetAverageValue: 6000
