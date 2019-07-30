@@ -1,12 +1,12 @@
 ARG ARCH="amd64"
 ARG OS="linux"
-FROM ubuntu
+FROM ubuntu:18.04
 LABEL maintainer="The devops Authors"
 
 ARG ARCH="amd64"
 ARG OS="linux"
 
-RUN apt-get install golang-go
+RUN apt-get install -y golang-go
 ADD ./ /tmp
 WORKDIR /tmp
 ENV GOPATH /tmp
