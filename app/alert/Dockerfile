@@ -6,10 +6,15 @@ LABEL maintainer="The devops Authors"
 ARG ARCH="amd64"
 ARG OS="linux"
 
-RUN apt-get install -y golang-go
+RUN apt-get install -y wget 
 ADD ./ /tmp
 WORKDIR /tmp
+RUN wget https://dl.google.com/go/go1.12.7.linux-amd64.tar.gz
+RUN tar xvf go1.12.7.linux-amd64.tar.gz
+ENV GOROOT /tmp/go/bin
 ENV GOPATH /tmp
+RUN ln /tmp/go/bin /bin
+
 RUN go build -o alertmanager src/github.com/prometheus/alertmanager/cmd/alertmanager/main.go
 RUN go build -o amtool src/github.com/prometheus/alertmanager/cmd/amtool/main.go
 RUN chmod 777 alertmanager 
