@@ -129,7 +129,7 @@ var DefaultFuncs = FuncMap{
 	"toLower": strings.ToLower,
 	"title":   strings.Title,
 	"timeOffset": func(tt time.Time, offset string) time.Time {
-		d, err :=  time.ParseDuration(offset)
+		d, err := time.ParseDuration(offset)
 		if err != nil {
 			return tt
 		}
