@@ -8,7 +8,7 @@ ARG OS="linux"
 
 RUN mkdir -p /project
 RUN mkdir -p /etc/alertmanager/
-COPY src/github.com/prometheus/alertmanager/examples/ha/alertmanager.yml      /etc/alertmanager/alertmanager.yml
+ADD ./src/github.com/prometheus/alertmanager/examples/ha/alertmanager.yml      /etc/alertmanager
 
 RUN apt-get update -y
 RUN apt-get install -y wget 
