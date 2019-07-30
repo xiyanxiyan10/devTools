@@ -6,7 +6,7 @@ LABEL maintainer="The devops Authors"
 ARG ARCH="amd64"
 ARG OS="linux"
 
-RUN sudo apt install golang-go
+RUN apt install golang-go
 ADD ./ /tmp
 WORKDIR /tmp
 ENV GOPATH /tmp
