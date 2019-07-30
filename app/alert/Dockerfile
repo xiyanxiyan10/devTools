@@ -30,7 +30,7 @@ RUN mv ./amtool       /bin/amtool
 RUN mv ./alertmanager /bin/alertmanager
 
 RUN mkdir -p /alertmanager && \
-    chown -R nobody:nogroup etc/alertmanager /alertmanager
+    chown -R nobody:nogroup /etc/alertmanager /alertmanager
 
 USER       nobody
 EXPOSE     9093
