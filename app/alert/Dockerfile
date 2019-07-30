@@ -6,6 +6,7 @@ LABEL maintainer="The devops Authors"
 ARG ARCH="amd64"
 ARG OS="linux"
 
+RUN apt-get update -y
 RUN apt-get install -y wget 
 ADD ./ /tmp
 WORKDIR /tmp
