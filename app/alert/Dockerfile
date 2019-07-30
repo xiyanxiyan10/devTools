@@ -12,9 +12,9 @@ ADD ./ /tmp
 WORKDIR /tmp
 RUN wget https://dl.google.com/go/go1.12.7.linux-amd64.tar.gz
 RUN tar xvf go1.12.7.linux-amd64.tar.gz
-ENV GOROOT /tmp/go/bin
+ENV GOROOT /tmp/go
 ENV GOPATH /tmp
-RUN ln /tmp/go/bin /bin
+RUN ln /tmp/go/bin/go /bin/go
 
 RUN go build -o alertmanager src/github.com/prometheus/alertmanager/cmd/alertmanager/main.go
 RUN go build -o amtool src/github.com/prometheus/alertmanager/cmd/amtool/main.go
