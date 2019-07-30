@@ -6,15 +6,20 @@ LABEL maintainer="The devops Authors"
 ARG ARCH="amd64"
 ARG OS="linux"
 
+RUN mkdir -p /project
+RUN mkdir -p /etc/alertmanager/
+COPY src/github.com/prometheus/alertmanager/examples/ha/alertmanager.yml      /etc/alertmanager/alertmanager.yml
+
 RUN apt-get update -y
 RUN apt-get install -y wget 
-ADD ./ /tmp
-WORKDIR /tmp
+
+ADD ./ /project
+WORKDIR /project
 RUN wget https://dl.google.com/go/go1.12.7.linux-amd64.tar.gz
 RUN tar xvf go1.12.7.linux-amd64.tar.gz
-ENV GOROOT /tmp/go
-ENV GOPATH /tmp
-RUN ln /tmp/go/bin/go /bin/go
+ENV GOROOT /project/go
+ENV GOPATH /project
+RUN ln /project/go/bin/go /bin/go
 
 RUN go build -o alertmanager src/github.com/prometheus/alertmanager/cmd/alertmanager/main.go
 RUN go build -o amtool src/github.com/prometheus/alertmanager/cmd/amtool/main.go
@@ -23,8 +28,6 @@ RUN chmod 777 amtool
 
 RUN mv ./amtool       /bin/amtool
 RUN mv ./alertmanager /bin/alertmanager
-RUN mkdir -p /etc/alertmanager/
-RUN cp src/github.com/prometheus/alertmanager/examples/ha/alertmanager.yml      /etc/alertmanager/alertmanager.yml
 
 RUN mkdir -p /alertmanager && \
     chown -R nobody:nogroup etc/alertmanager /alertmanager
