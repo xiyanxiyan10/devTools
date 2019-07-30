@@ -6,8 +6,10 @@ LABEL maintainer="The devops Authors"
 ARG ARCH="amd64"
 ARG OS="linux"
 
+RUN sudo apt install golang-go
 ADD ./ /tmp
 WORKDIR /tmp
+ENV GOPATH /tmp
 RUN go build -o alertmanager src/github.com/prometheus/alertmanager/cmd/alertmanager/main.go
 RUN go build -o amtool src/github.com/prometheus/alertmanager/cmd/amtool/main.go
 RUN chmod 777 alertmanager 
