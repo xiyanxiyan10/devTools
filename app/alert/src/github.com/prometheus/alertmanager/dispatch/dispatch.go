@@ -423,7 +423,9 @@ func (ag *aggrGroup) flush(notify func(...*types.Alert) bool) {
 		a := *alert
 		// Ensure that alerts don't resolve as time move forwards.
 		if !a.ResolvedAt(now) {
-			a.EndsAt = time.Time{}
+			// @Todo
+			// a.EndsAt = time.Time{}
+			a.EndsAt = now
 		}
 		alertsSlice = append(alertsSlice, &a)
 	}
