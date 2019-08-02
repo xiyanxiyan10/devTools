@@ -120,10 +120,13 @@ spec:
       containers:
         - name: metrics-server
           image: registry.cn-hongkong.aliyuncs.com/misaka/metrics-server
+          #image: k8s.gcr.io/metrics-server-amd64:v0.3.1
           imagePullPolicy: Always
           command:
             - /metrics-server
-            - --requestheader-client-ca-file=/etc/hpaconf/ca.pem  
+            - --kubelet-insecure-tls  
+            - --kubelet-preferred-address-types=InternalIP 
+              #- --requestheader-client-ca-file=/etc/hpaconf/ca.pem  
           volumeMounts:
           - name: hpaconf
             mountPath: /etc/hpaconf/
