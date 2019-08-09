@@ -2,8 +2,8 @@
 #  @brief tiny tool used to manger project 
 #  @file repos.sh
 #  @author xiyanxiyan10
-#  @CreatedTime 2014/09/27
-#  @LastChanged 2014/09/27
+#  @CreatedTime 2019/08/09
+#  @LastChanged 2019/08/09
 
 case "$1" in
     "record" )
@@ -46,9 +46,6 @@ case "$1" in
         git push git@github.com:${2}/${3}.git --tag
         ;;
     "clean" )
-        find -name '*.out' |xargs rm 
-        find -name 'cscope.*' |xargs rm 
-        find -name 'tags'  |xargs rm 
         find -name '*.so'  |xargs rm 
         find -name '*.o'   |xargs rm 
         find -name '*.a'   |xargs rm 
@@ -59,11 +56,15 @@ case "$1" in
         cscope -bqR
         ctags -R *
         ;;
+    "pyformat")
+        yapf -p --style='{based_on_style: chromium, indent_width: 4}' -i -r ./
+        ;;
     "replace")
         ${2} | xargs perl -pi -e \'${3}\'
         ;;
     * ) 
         echo "Help"
+        echo "./repos.sh pyformat                               => format project python files"
         echo "./repos.sh record                                 => record patch"
         echo "./repos.sh pull                                   => pull patch"
         echo "./repos.sh push                                   => push patch"
