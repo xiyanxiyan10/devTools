@@ -1,6 +1,6 @@
 ARG ARCH="amd64"
 ARG OS="linux"
-FROM ubuntu:18.04
+FROM ubuntu:16.04
 LABEL maintainer="The devops Authors"
 
 ARG ARCH="amd64"
