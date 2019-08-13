@@ -135,11 +135,13 @@ var DefaultFuncs = FuncMap{
 		}
 		return tt.Add(d)
 	},
-
+	"echo": func(echo string) string {
+		return echo
+	},
 	"timeOffsetStr": func(tt time.Time, offset string, format string) string {
 		d, err := time.ParseDuration(offset)
 		if err != nil {
-			return tt
+			return ""
 		}
 		return tt.Add(d).Format(format)
 	},
