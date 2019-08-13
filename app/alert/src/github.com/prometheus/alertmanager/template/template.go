@@ -135,9 +135,17 @@ var DefaultFuncs = FuncMap{
 		}
 		return tt.Add(d)
 	},
-	"showTime": func (t time.Time, format string) string {
+
+	"timeOffsetStr": func(tt time.Time, offset string, format string) string {
+		d, err := time.ParseDuration(offset)
+		if err != nil {
+			return tt
+		}
+		return tt.Add(d).Format(format)
+	},
+	"showTime": func(t time.Time, format string) string {
 		return t.Format(format)
-	}
+	},
 	// join is equal to strings.Join but inverts the argument order
 	// for easier pipelining in templates.
 	"join": func(sep string, s []string) string {
