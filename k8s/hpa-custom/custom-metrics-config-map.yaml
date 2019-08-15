@@ -23,7 +23,7 @@ data:
       name:
         matches: "^container_(.*)_bytes_total"
         as: "${1}_custom"
-      metricsQuery: 'sum(<<.Series>>{<<.LabelMatchers>>}) by (<<.GroupBy>>)'
+      metricsQuery: 'sum(rate(<<.Series>>{<<.LabelMatchers>>}[2m])) by (<<.GroupBy>>)'
     - seriesQuery: 'container_network_transmit_bytes_total{namespace!="", pod_name!=""}'
       resources:
         overrides:
@@ -32,7 +32,7 @@ data:
       name:
         matches: "^container_(.*)_bytes_total"
         as: "${1}_custom"
-      metricsQuery: 'sum(<<.Series>>{<<.LabelMatchers>>}) by (<<.GroupBy>>)'
+      metricsQuery: 'sum(rate(<<.Series>>{<<.LabelMatchers>>}[2m])) by (<<.GroupBy>>)'
     - seriesQuery: 'container_fs_io_current{namespace!="", pod_name!=""}'
       resources:
         overrides:
