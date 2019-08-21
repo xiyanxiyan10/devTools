@@ -16,7 +16,7 @@ spec:
         app: alertmanager
     spec:
       containers:
-      - image: reg.changhong.io/library/mmalertmanager:v6
+      - image: local/alertmanager:patch
         name: alertmanager
         args:
         - "--config.file=/etc/alertmanager/config.yml"
