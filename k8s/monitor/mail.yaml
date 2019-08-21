@@ -17,8 +17,8 @@ data:
     <tr>
         <td> {{ index $alert.Annotations "policy" }} </td>
         <td> {{ index $alert.Annotations "description" }} </td>
-        <td> {{ $alert.StartsAt.Format "20060102 15:04:05"}} </td>
-        <td> {{ $alert.EndsAt.Format "20060102 15:04:05" }} </td>
+        <td> {{ timeOffsetStr $alert.StartsAt "8h" "20060102 15:04:05"}} </td>
+        <td> {{ timeOffsetStr $alert.EndsAt "8h" "20060102 15:04:05" }} </td>
     </tr>
     {{ end }}
     </table>
