@@ -1,0 +1,34 @@
+# cat prometheus.svc.yml 
+---
+kind: Service
+apiVersion: v1
+metadata:
+  labels:
+    app: prometheus
+  name: prometheus
+  namespace: prometheus
+spec:
+  type: NodePort
+  ports:
+  - port: 9090
+    targetPort: 9090
+    nodePort: 30003
+  selector:
+    app: prometheus
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  labels:
+    app: alertmanager
+  name: alertmanager
+  namespace: prometheus
+spec:
+  type: NodePort
+  ports:
+  - port: 9093
+    targetPort: 9093
+    nodePort: 30006
+  selector:
+    app: alertmanager
