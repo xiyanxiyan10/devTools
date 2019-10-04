@@ -1,15 +1,15 @@
-# cat captcha.svc.yml 
+# cat mysite.svc.yml 
 ---
 kind: Service
 apiVersion: v1
 metadata:
   labels:
-    app: captcha
-  name: captcha
+    app: mysite
+  name: mysite
   namespace: jojoquant
 spec:
   ports:
   - port: 8666
     targetPort: 8666
   selector:
-    app: captcha
+    app: mysite

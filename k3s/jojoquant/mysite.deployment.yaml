@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    name: mysite
+  name: mysite
+  namespace: jojoquant
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysite
+  template:
+    metadata:
+      labels:
+        app: mysite
+    spec:
+      containers:
+      - image: k8s.gcr.io/mysite
+        name: mysite
+        ports:
+        - containerPort: 8666
+          protocol: TCP
+        env:
+        - name: QUANT_CONFIG
+          value: /config/config.yaml
+        volumeMounts:
+        - mountPath: "/config"
+          name: mysite-config
+      volumes:
+      - name: mysite-config
+        configMap:
+          name: mysite-config
