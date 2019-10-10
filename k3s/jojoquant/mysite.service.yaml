@@ -9,7 +9,7 @@ metadata:
   namespace: jojoquant
 spec:
   ports:
-  - port: 8666
-    targetPort: 8666
+  - port: 8888
+    targetPort: 8888
   selector:
     app: mysite
