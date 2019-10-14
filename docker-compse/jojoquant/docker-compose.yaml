@@ -5,8 +5,8 @@ services:
    #ports:
    #  - 27017:27017 
    volumes:
-     - /data/db:/mongo
-   command: mongod --bind_ip_all
+     - /mongo:/data/db
+   command: mongod --bind_ip_all 
  mysite:
    image: mysite
    links:
