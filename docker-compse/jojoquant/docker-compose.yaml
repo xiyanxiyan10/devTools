@@ -1,0 +1,49 @@
+version: '2.1'
+services:
+ mongo:
+   image: mongo
+   #ports:
+   #  - 27017:27017 
+   volumes:
+     - /data/db:/mongo
+   command: mongod --bind_ip_all
+ mysite:
+   image: mysite
+   links:
+     - captcha
+     - mongo
+   ports:
+     - 8666:8666 
+   depends_on:
+     - captcha
+     - mongo
+   volumes:
+     - /mysite/config.yaml:/etc/config.yaml
+   environment:
+     QUANT_CONFIG: "/etc/config.yaml"
+ captcha:
+   image: captcha
+   ports:
+     - 8667:8666
+ busybox:
+   image: busybox
+   command: sleep 99999999
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
