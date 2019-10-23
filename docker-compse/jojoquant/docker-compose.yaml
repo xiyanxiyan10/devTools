@@ -6,14 +6,15 @@ services:
    #  - 27017:27017 
    volumes:
      - /mongo:/data/db
-   command: mongod --bind_ip_all 
+   restart: always    
+   command: --bind_ip_all 
  mysite:
    image: mysite
    links:
      - captcha
      - mongo
    ports:
-     - 8666:8666 
+     - 80:8666 
    depends_on:
      - captcha
      - mongo
@@ -25,25 +26,6 @@ services:
    image: captcha
    ports:
      - 8667:8666
- busybox:
-   image: busybox
-   command: sleep 99999999
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+   # busybox:
+   #image: busybox
+   #command: sleep 99999999
