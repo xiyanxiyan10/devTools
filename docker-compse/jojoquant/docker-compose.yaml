@@ -5,7 +5,7 @@ services:
    #ports:
    #  - 27017:27017 
    volumes:
-     - /mongo:/data/db
+     - /home/ubuntu/db/mongo:/data/db
    restart: always    
    command: --bind_ip_all 
  mysite:
@@ -19,7 +19,7 @@ services:
      - captcha
      - mongo
    volumes:
-     - /mysite/config.yaml:/etc/config.yaml
+     - /home/ubuntu/conf/mysite/config.yaml:/etc/config.yaml
    environment:
      QUANT_CONFIG: "/etc/config.yaml"
  captcha:
