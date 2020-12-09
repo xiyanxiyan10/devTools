@@ -6,20 +6,17 @@ metadata:
 data:
   mail.tmpl: |
     {{ define "alert.html" }}
-    <table border="1px" bordercolor="#000000" cellspacing="0px" style="border-collapse:collapse">
-    <tr>
-        <td>name</td>
-        <td>event</td>
-        <td>start</td>
-        <td>end</td>
-    </tr>
+    <h1> 监控告警通知 </h1>
     {{ range $i, $alert := .Alerts }}
-    <tr>
-        <td> {{ index $alert.Annotations "policy" }} </td>
-        <td> {{ index $alert.Annotations "description" }} </td>
-        <td> {{ timeOffsetStr $alert.StartsAt "8h" "20060102 15:04:05"}} </td>
-        <td> {{ timeOffsetStr $alert.EndsAt "8h" "20060102 15:04:05" }} </td>
-    </tr>
+    <hr />
+    <pre>
+        告警级别: {{ index $alert.Annotations "levelstr" }} 
+        发生时间: {{ $alert.StartsAt }} 
+        结束时间: {{ if $alert.EndsAt }}{{ $alert.EndsAt }} {{ end }} 
+        触发规则: {{ index $alert.Annotations "description" }} 
+        规则描述: {{ index $alert.Annotations "timestr" }} 
+        告警对象: {{ index $alert.Annotations "target" }} 
+        所属区域: {{ index $alert.Annotations "aid" }} 
+    </pre>
     {{ end }}
-    </table>
     {{ end }}
