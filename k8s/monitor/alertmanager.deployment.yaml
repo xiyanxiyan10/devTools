@@ -16,12 +16,12 @@ spec:
         app: alertmanager
     spec:
       containers:
-      - image: local/alertmanager:patch
+      - image: reg.changhong.io/k8s1.9/alertmanager:v0.16.1
         name: alertmanager
         args:
         - "--config.file=/etc/alertmanager/config.yml"
-        - "--storage.path=/etc/alertmanager"
-        - "--log.level=debug"  
+        - "--storage.path=/alertmanager"
+        - "--log.level=debug"
         ports:
         - containerPort: 9093
           protocol: TCP
@@ -31,6 +31,8 @@ spec:
           mountPath: /etc/alertmanager
         - name: mails-volume
           mountPath: /etc/mails
+        - name: zone
+          mountPath: /etc/localtime
         resources:
           requests:
             cpu: 100m
@@ -49,3 +51,6 @@ spec:
       - name: mails-volume
         configMap:
           name: mails
+      - name: zone
+        hostPath:
+          path: /usr/share/zoneinfo/Asia/Shanghai

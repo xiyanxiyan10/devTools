@@ -11,7 +11,7 @@ data:
     <hr />
     <pre>
         告警级别: {{ index $alert.Annotations "levelstr" }} 
-        发生时间: {{ $alert.StartsAt }} 
+        发生时间: {{ $alert.StartsAt.Local.String }} 
         结束时间: {{ if $alert.EndsAt.IsZero }} / {{else}} {{ $alert.EndsAt.Local.String }} {{ end }} 
         触发规则: {{ index $alert.Annotations "description" }} 
         规则描述: {{ index $alert.Annotations "timestr" }} 
